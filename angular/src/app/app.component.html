@@ -10,7 +10,7 @@
         </div>
         <div class="contacts">
 
-            <div class="contact" *ngFor="let contact of userData;let i = index" (click)="selectedUser(i)">
+            <div class="contact"  *ngFor="let contact of userData;let i = index" [ngClass]="{ 'selected': contact.id == selectedContact.id }"  (click)="selectedUser(i)">
                 <div class="img" *ngIf="contact.user.toUpperCase().includes(searchedUser) || searchedUser == null">
                     <img src="{{contact.img}}" alt="{{contact.user}}">
                 </div>

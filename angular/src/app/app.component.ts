@@ -10,6 +10,8 @@ export class AppComponent implements OnInit {
   public userData;
   public selectedContact;
   public messagesEmpty = false;
+  public searchedUser = null;
+  
   constructor(
     private dataService: DataService
   ) { }
@@ -25,10 +27,7 @@ export class AppComponent implements OnInit {
 
   selectedUser(i) {
     this.selectedContact = this.userData[i];
-
     (this.selectedContact["messages"].length == 0 ? this.messagesEmpty = true : this.messagesEmpty = false);
-
-
   }
 
   onSubmit(value: any) {
@@ -38,7 +37,10 @@ export class AppComponent implements OnInit {
       "created": Date(),
       "createdBy": 0
     };
-    (value == "" ? alert("Please send a") : this.selectedContact.messages.push(message));
+    (value == "" ? alert('Please enter a message') : this.selectedContact.messages.push(message));
   }
 
+  searchUser(value: any) {
+    this.searchedUser = value.toUpperCase();
+  }
 }

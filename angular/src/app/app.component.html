@@ -17,20 +17,20 @@
                 <div class="text" *ngIf="contact.user.toUpperCase().includes(searchedUser) || searchedUser == null">
                     <h4>{{contact.user}}</h4>
                     <p *ngIf="contact.messages.length == 0"> <i> Start a conversation with {{contact.user}} </i> </p>
-                    <p *ngIf="contact.messages.length != 0"> {{contact.messages[contact.messages.length-1].text}} </p>
+                    <p *ngIf="contact.messages.length != 0"> {{contact.messages[contact.messages.length-1].text |  slice:0:50 }} </p>
                 </div>
             </div>
         </div>
     </div>
     <div class="chat-area">
         <div class="header">
-            <h3>{{selectedContact.user}}</h3>
+            <h3>{{selectedContact?.user}}</h3>
         </div>
         <div class="chat">
             <div *ngIf="messagesEmpty" class="emptyChat">
                 <p>You have not started a conversation yet</p>
             </div>
-            <div class="msg" *ngFor="let chat of selectedContact['messages']" [ngClass]="{ 'outgoing': chat.createdBy == 0 }">
+            <div class="msg" *ngFor="let chat of selectedContact?.messages" [ngClass]="{ 'outgoing': chat.createdBy == 0 }">
                 <div *ngIf="chat.createdBy == 0" class="img">
                     <img src="https://randomuser.me/api/portraits/men/13.jpg" alt="Madhav Sharma">
                     <p>{{chat.created | date:'shortTime'}}</p>

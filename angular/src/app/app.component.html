@@ -15,9 +15,9 @@
                 </div>
                 <div class="text">
                     <h4>{{contact.user}}</h4>
-                    <p *ngIf="contact.messages.length == 0" > <i> Start conversation with {{contact.user}} </i> </p>
-                    <p *ngIf="contact.messages.length != 0" > {{contact.messages[contact.messages.length-1].text}} </p>
-                </div> 
+                    <p *ngIf="contact.messages.length == 0"> <i> Start conversation with {{contact.user}} </i> </p>
+                    <p *ngIf="contact.messages.length != 0"> {{contact.messages[contact.messages.length-1].text}} </p>
+                </div>
             </div>
         </div>
     </div>
@@ -46,19 +46,14 @@
                     <p> {{chat.text}}</p>
                 </div>
             </div>
-
-
         </div>
 
-        <div class="send-message">
+        <form class="send-message"  (ngSubmit)="onSubmit(msg.value); msg.value=''">
             <div class="icon">
                 <i class="fa fa-paperclip"></i>
             </div>
-            <input type="text" placeholder="Type something to send ..">
-            <div class="icon">
-                <i class="fa fa-paper-plane"></i>
-            </div>
-        </div>
+            <input type="text" #msg  placeholder="Type here to send a message ...">
+        </form>
 
     </div>
 </div>

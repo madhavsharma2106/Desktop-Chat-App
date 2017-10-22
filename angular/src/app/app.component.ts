@@ -25,12 +25,20 @@ export class AppComponent implements OnInit {
 
   selectedUser(i) {
     this.selectedContact = this.userData[i];
-    console.log(this.selectedContact);
 
-    if (this.selectedContact["messages"].length == 0)
-      this.messagesEmpty = true;
-    else this.messagesEmpty = false;
+    (this.selectedContact["messages"].length == 0 ? this.messagesEmpty = true : this.messagesEmpty = false);
 
+
+  }
+
+  onSubmit(value: any) {
+    let message = {
+      "id": 0,
+      "text": value,
+      "created": Date(),
+      "createdBy": 0
+    };
+    (value == "" ? alert("Please send a") : this.selectedContact.messages.push(message));
   }
 
 }

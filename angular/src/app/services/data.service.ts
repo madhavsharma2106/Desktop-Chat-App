@@ -20,12 +20,10 @@ export class DataService {
       res => {
         // Removing empty spaces by regex
         this.userData =  JSON.parse(res["_body"].replace(/\s+/g,' '));
-        console.log(this.userData);        
         return this.userData;
       }
     );
   }
-
 
 
 }

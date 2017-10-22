@@ -1,104 +1,64 @@
 <div class="chat-app">
-        <!-- Contacts Navigation -->
-        <div class="contacts-nav">
-            <div class="header">
-                <h2> Madhav's Offline Chat</h2>
-            </div>
-            <div class="search">
-                <i class="fa fa-search"></i>
-                <input type="text" placeholder="Search">
-            </div>
-            <div class="contacts">
-                <div class="contact">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Contact Image">
-                    </div>
-                    <div class="text">
-                        <h4>Nicholas Payne</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing...</p>
-                    </div>
-                </div>
-                <div class="contact selected">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Contact Image">
-                    </div>
-                    <div class="text">
-                        <h4>Nicholas Payne</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing...</p>
-                    </div>
-                </div>
-                <div class="contact">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Contact Image">
-                    </div>
-                    <div class="text">
-                        <h4>Nicholas Payne</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing...</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Contacts Navigation -->
+    <div class="contacts-nav">
+        <div class="header">
+            <h2> Madhav's Offline Chat</h2>
         </div>
-
-        <div class="chat-area">
-            <div class="header">
-                <h3>Amy Daneil</h3>
+        <div class="search">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="contacts">
+            <div class="contact" *ngFor="let contact of userData;let i = index" (click)="selectedUser(i)">
+                <div class="img">
+                    <img src="{{contact.img}}" alt="{{contact.user}}">
+                </div>
+                <div class="text">
+                    <h4>{{contact.user}}</h4>
+                    <p *ngIf="contact.messages.length == 0" > <i> Start conversation with {{contact.user}} </i> </p>
+                    <p *ngIf="contact.messages.length != 0" > {{contact.messages[contact.messages.length-1].text}} </p>
+                </div> 
             </div>
-            <div class="chat">
-                <div class="msg">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User Image">
-                        <p>12:47 PM</p>
-                    </div>
-                    <div class="text">
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, earum!</p>
-                    </div>
-                </div>
-
-                <div class="outgoing msg">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User Image">
-                        <p>12:47 PM</p>
-                    </div>
-                    <div class="text">
-                        <p>Lorem ipsum dolor Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, rem! sit amet,
-                            consectetur adipisicing elit. Obcaecati, earum!</p>
-                    </div>
-                </div>
-
-                <div class=" msg">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User Image">
-                        <p>12:47 PM</p>
-                    </div>
-                    <div class="text">
-                        <p>Lorem ipsum.</p>
-                    </div>
-                </div>
-
-                <div class="outgoing msg">
-                    <div class="img">
-                        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="User Image">
-                        <p>12:47 PM</p>
-                    </div>
-                    <div class="text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, animi consequatur tenetur vitae
-                            temporibus alias in expedita dolorem voluptatem, ratione placeat perspiciatis incidunt vero,
-                            quod necessitatibus perferendis id. Velit, a.</p>
-                    </div>
-                </div>
-               
-
-            </div>
-
-            <div class="send-message">
-                <div class="icon">
-                    <i class="fa fa-paperclip"></i>
-                </div>
-                <input type="text" placeholder="Type something to send ..">
-                <div class="icon">
-                    <i class="fa fa-paper-plane"></i>
-                </div>
-            </div>
-
         </div>
     </div>
+
+    <div class="chat-area">
+        <div class="header">
+            <h3>{{selectedContact.user}}</h3>
+        </div>
+        <div class="chat">
+
+            <div *ngIf="messagesEmpty" class="emptyChat">
+                <p>You have not started a conversation yet</p>
+            </div>
+
+            <div class="msg" *ngFor="let chat of selectedContact['messages']" [ngClass]="{ 'outgoing': chat.createdBy == 0 }">
+                <div *ngIf="chat.createdBy == 0" class="img">
+                    <img src="https://randomuser.me/api/portraits/men/13.jpg" alt="Madhav Sharma">
+                    <p>{{chat.created | date:'shortTime'}}</p>
+                </div>
+
+                <div *ngIf="chat.createdBy != 0" class="img">
+                    <img src="{{selectedContact.img}}" alt="{{selectedContact.user}}">
+                    <p>{{chat.created | date:'shortTime'}}</p>
+                </div>
+                <div class="text">
+                    <p> {{chat.text}}</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="send-message">
+            <div class="icon">
+                <i class="fa fa-paperclip"></i>
+            </div>
+            <input type="text" placeholder="Type something to send ..">
+            <div class="icon">
+                <i class="fa fa-paper-plane"></i>
+            </div>
+        </div>
+
+    </div>
+</div>

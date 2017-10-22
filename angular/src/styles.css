@@ -190,6 +190,17 @@ button:focus {
   overflow: auto;
 }
 
+
+.chat-area .emptyChat{
+    background-color: #849ffe;
+    text-align: center;
+    width: 50%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
 .chat-area .send-message {
   -ms-flex-preferred-size: 50px;
       flex-basis: 50px;
